@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="full-home">
+    <h2>Hey {{ session['username'] }} 👋</h2>
+    <p style="font-size: 1.1rem; margin-top: 10px;">
+    🔥 You're on a <strong>{{ streak }}</strong>-day login streak! Keep going 💪
+    </p>
+
+    <p>Welcome back to <strong>Budget Buddy</strong> — your smart expense manager.</p>
+    <p>Track, analyze, and grow your savings wisely 💼</p>
+
+    <div class="metrics-box">
+        <div class="metric">
+            <h3>💰 Income</h3>
+            <p>₹{{ income }}</p>
+        </div>
+        <div class="metric">
+            <h3>💸 Expense</h3>
+            <p>₹{{ expense }}</p>
+        </div>
+        <div class="metric">
+            <h3>📊 Transactions</h3>
+            <p>{{ count }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

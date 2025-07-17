@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="add-container">
+    <div class="animated-emoji">✏️ Edit Transaction</div>
+    <h2>Update Your Transaction</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" step="0.01" name="amount" id="amount" value="{{ txn.amount }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="type">Type</label>
+            <select name="type" id="type" required>
+                <option value="income" {% if txn.type == 'income' %}selected{% endif %}>Income</option>
+                <option value="expense" {% if txn.type == 'expense' %}selected{% endif %}>Expense</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" name="category" id="category" value="{{ txn.category }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date" value="{{ txn.date }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="note">Note</label>
+            <textarea name="note" id="note" rows="2">{{ txn.note }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="tag">Tag (Need/Want/Emergency)</label>
+            <input type="text" name="tag" id="tag" value="{{ txn.tag }}">
+        </div>
+
+        <!-- 🧾 Receipt Section -->
+        <div class="form-group">
+            <label for="receipt">Replace Receipt (optional)</label>
+            <input type="file" name="receipt" id="receipt" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
+            {% if txn.receipt %}
+                <p style="margin-top: 5px;">📎 Existing: 
+                    <a href="{{ url_for('static', filename='receipts/' ~ txn.receipt) }}" target="_blank">
+                        View uploaded file
+                    </a>
+                </p>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="submit-btn">💾 Save Changes</button>
+    </form>
+</div>
+{% endblock %}

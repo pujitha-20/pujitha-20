@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .page-container {
+        max-width: 1000px;
+        margin: 60px auto;
+        padding: 40px;
+        background: #f9fafc;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 40px;
+        font-family: 'Segoe UI', sans-serif;
+        color: #2c3e50;
+    }
+
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+
+    .txn-card {
+        background: #ffffff;
+        padding: 25px 20px;
+        border-radius: 16px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+        transition: transform 0.2s ease;
+        position: relative;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .txn-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .txn-card h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #34495e;
+    }
+
+    .txn-card p {
+        font-size: 0.95rem;
+        margin: 4px 0;
+        color: #555;
+    }
+
+    .income {
+        border-left: 6px solid #2ecc71;
+    }
+
+    .expense {
+        border-left: 6px solid #e74c3c;
+    }
+
+    .txn-card a {
+        color: #2a6fd0;
+        font-weight: 500;
+    }
+
+    .txn-actions {
+        margin-top: 15px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .txn-actions a,
+    .txn-actions button {
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+    }
+
+    .txn-actions a {
+        background-color: #5c6bc0;
+        color: white;
+        text-decoration: none;
+    }
+
+    .txn-actions button {
+        background-color: #d9534f;
+        color: white;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="page-container">
+    <h2 class="page-title">📋 All Transactions</h2>
+
+    {% if txns %}
+    <div class="card-grid">
+        {% for txn in txns %}
+        <div class="txn-card {{ txn.type }}">
+            <h4>
+                {% if txn.type == 'income' %}
+                    💰
+                {% else %}
+                    💸
+                {% endif %}
+                {{ txn.category }} - ₹{{ txn.amount }}
+            </h4>
+            <p><strong>Type:</strong> {{ txn.type.capitalize() }}</p>
+            <p><strong>Date:</strong> {{ txn.date }}</p>
+            <p><strong>Note:</strong> {{ txn.note or '—' }}</p>
+            <p><strong>Tag:</strong> {{ txn.tag or '—' }}</p>
+
+            {% if txn.receipt %}
+            <p><strong>Receipt:</strong>
+                <a href="{{ url_for('static', filename='receipts/' ~ txn.receipt) }}" target="_blank">📎 View</a>
+            </p>
+            {% endif %}
+
+            <div class="txn-actions">
+                <a href="/edit/{{ txn.id }}">✏️ Edit</a>
+                <form method="POST" action="/delete/{{ txn.id }}" onsubmit="return confirm('Are you sure you want to delete this transaction?');">
+                    <button type="submit">🗑 Delete</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p style="text-align:center; font-size:1.2rem;">No transactions found 🙁</p>
+    {% endif %}
+</div>
+{% endblock %}

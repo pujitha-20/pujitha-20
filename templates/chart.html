@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .chart-container {
+        max-width: 700px;
+        margin: 60px auto;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border-radius: 20px;
+        box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+        text-align: center;
+        animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .chart-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #333;
+        font-weight: 700;
+    }
+
+    .pie-chart-wrapper {
+        position: relative;
+        width: 280px;
+        height: 280px;
+        margin: 0 auto 40px;
+        border-radius: 50%;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .pie-chart {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+    .center-hole {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 120px;
+        height: 120px;
+        background: white;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: inset 0 0 12px rgba(0,0,0,0.05);
+    }
+
+    .legend-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        align-items: center;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        background-color: #f4f6fb;
+        border-radius: 12px;
+        padding: 10px 18px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        font-size: 1rem;
+        width: 100%;
+        max-width: 340px;
+        transition: transform 0.2s ease;
+    }
+
+    .legend-item:hover {
+        transform: scale(1.02);
+    }
+
+    .color-box {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        margin-right: 12px;
+        flex-shrink: 0;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="chart-container">
+    <h2 class="chart-title">🍰 Expense Distribution</h2>
+
+    {% if slices %}
+        <div class="pie-chart-wrapper">
+            <div class="pie-chart" style="background-image: conic-gradient({{ gradient }});"></div>
+            <div class="center-hole"></div>
+        </div>
+
+        <div class="legend-list">
+            {% for slice in slices %}
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: {{ slice.color }};"></span>
+                    <span>{{ slice.category }} — {{ slice.percent }}%</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p style="margin-top: 30px; color: #888;">No expenses to display for this month.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 style="text-align: center; margin-top: 40px;">🧁 Set Daily Expense Limit</h2>
+
+    {% if message %}
+        <p style="color: green; text-align: center; font-weight: bold;">{{ message }}</p>
+    {% endif %}
+
+    <form method="POST" style="max-width: 400px; margin: auto; margin-top: 30px;">
+        <label for="date"><strong>Date:</strong></label><br>
+        <input type="date" id="date" name="date" class="form-control" required><br><br>
+
+        <label for="limit"><strong>Daily Limit (₹):</strong></label><br>
+        <input type="number" id="limit" name="limit" step="0.01" class="form-control" required><br><br>
+
+        <button type="submit" class="btn btn-primary">Set Limit</button>
+    </form>
+</div>
+{% endblock %}

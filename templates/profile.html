@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .profile-container {
+        max-width: 520px;
+        margin: 60px auto;
+        padding: 40px;
+        background: linear-gradient(145deg, #f3f6fa, #e9ecf2);
+        border-radius: 20px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+        animation: fadeIn 0.8s ease-in-out;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .profile-title {
+        text-align: center;
+        font-size: 2rem;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    .profile-info p {
+        font-size: 1.05rem;
+        margin: 12px 0;
+        padding: 12px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .profile-info strong {
+        color: #37474f;
+    }
+
+    .logout-btn {
+        display: block;
+        width: fit-content;
+        margin: 30px auto 0;
+        background: #607d8b;
+        color: white;
+        padding: 10px 24px;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: background 0.3s ease;
+    }
+
+    .logout-btn:hover {
+        background: #455a64;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="profile-container">
+    <h2 class="profile-title">👤 Your Profile</h2>
+
+    <div class="profile-info">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        {% if user.email %}
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        {% endif %}
+        {% if user.date_joined %}
+        <p><strong>Member since:</strong> {{ user.date_joined.strftime('%b %d, %Y') }}</p>
+        {% endif %}
+    </div>
+
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+{% endblock %}

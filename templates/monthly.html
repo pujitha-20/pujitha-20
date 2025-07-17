@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .report-container {
+        max-width: 900px;
+        margin: 60px auto;
+        padding: 40px;
+        background: linear-gradient(to bottom right, #f0f4f8, #ffffff);
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .report-title {
+        text-align: center;
+        font-size: 2.4rem;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
+    .month-form {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .month-form input[type="month"] {
+        padding: 8px 12px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+
+    .btn-primary {
+        background: #5c6bc0;
+        color: white;
+        border: none;
+        padding: 8px 18px;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .btn-primary:hover {
+        background: #3f51b5;
+    }
+
+    .card-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+        margin-top: 20px;
+    }
+
+    .stat-card {
+        width: 250px;
+        padding: 25px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        text-align: center;
+        transition: transform 0.2s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .stat-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .stat-value {
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .good {
+        color: #2e7d32;
+    }
+
+    .bad {
+        color: #c62828;
+    }
+
+    .neutral {
+        color: #1565c0;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="report-container">
+    <h2 class="report-title">📆 Monthly Report – {{ month }}</h2>
+
+    <form method="GET" action="/monthly" class="month-form">
+        <label for="month-select"><strong>Select Month: </strong></label>
+        <input type="month" id="month-select" name="month" value="{{ month }}" required>
+        <button type="submit" class="btn-primary">View</button>
+    </form>
+
+    <div class="card-section">
+        <div class="stat-card" style="border-top: 5px solid #2e7d32;">
+            <div class="stat-title">Income</div>
+            <div class="stat-value good">₹{{ income }}</div>
+        </div>
+
+        <div class="stat-card" style="border-top: 5px solid #c62828;">
+            <div class="stat-title">Expense</div>
+            <div class="stat-value bad">₹{{ expense }}</div>
+        </div>
+
+        {% if budget_limit %}
+        <div class="stat-card" style="border-top: 5px solid #1565c0;">
+            <div class="stat-title">Budget Limit</div>
+            <div class="stat-value neutral">₹{{ budget_limit }}</div>
+            {% if over_budget %}
+                <p class="bad">⚠ Over Budget</p>
+            {% else %}
+                <p class="good">✅ Within Budget</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

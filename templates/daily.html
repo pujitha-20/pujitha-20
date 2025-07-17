@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .page-container {
+        max-width: 700px;
+        margin: 60px auto;
+        padding: 40px;
+        background: linear-gradient(to right, #e5e8ec, #f4f6f9);
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .page-title {
+        text-align: center;
+        font-size: 2.2rem;
+        color: #2f2f2f;
+        margin-bottom: 30px;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .summary-box {
+        background: #fff;
+        padding: 25px 35px;
+        border-radius: 16px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        font-size: 1.1rem;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        animation: floatCard 4s ease-in-out infinite;
+    }
+
+    .alert-msg {
+        color: #b3261e;
+        font-weight: bold;
+    }
+
+    .success-msg {
+        color: #1b6e36;
+        font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatCard {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+        100% { transform: translateY(0); }
+    }
+</style>
+
+<div class="page-container">
+    <h2 class="page-title">📆 Today's Spending</h2>
+
+    <div class="summary-box">
+        <p><strong>Date:</strong> {{ date }}</p>
+        <p><strong>Total Spent:</strong> ₹{{ total }}</p>
+        <p><strong>Limit:</strong> ₹{{ limit }}</p>
+
+        {% if over_limit %}
+            <p class="alert-msg">⚠️ You're over your daily limit! Time to pause spending 🛑</p>
+        {% else %}
+            <p class="success-msg">✅ You’re within your daily limit. Great job! 🎯</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

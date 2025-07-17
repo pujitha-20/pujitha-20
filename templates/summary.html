@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .summary-container {
+        max-width: 960px;
+        margin: 60px auto;
+        padding: 40px;
+        background: linear-gradient(to bottom right, #edf1f7, #ffffff);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .summary-title {
+        text-align: center;
+        font-size: 2.4rem;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 40px;
+    }
+
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 24px;
+    }
+
+    .category-card {
+        background: #ffffff;
+        padding: 24px;
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        text-align: center;
+    }
+
+    .category-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .category-name {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #5c6bc0;
+        margin-bottom: 8px;
+    }
+
+    .category-amount {
+        font-size: 1.4rem;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .no-data {
+        text-align: center;
+        font-size: 1.2rem;
+        margin-top: 30px;
+        color: #888;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="summary-container">
+    <h2 class="summary-title">📊 Category-wise Summary</h2>
+
+    {% if summary %}
+    <div class="category-grid">
+        {% for category, total in summary.items() %}
+        <div class="category-card">
+            <div class="category-name">{{ category }}</div>
+            <div class="category-amount">₹{{ total }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="no-data">No transactions yet 😶</p>
+    {% endif %}
+</div>
+{% endblock %}

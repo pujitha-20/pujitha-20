@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600;800&display=swap');
+
+    .hero-section {
+        background: linear-gradient(to bottom, #c9d6ff, #e2e2e2);
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #2c3e50;
+        font-family: 'Raleway', sans-serif;
+        text-align: center;
+    }
+
+    .hero-section h1 {
+        font-size: 3.6rem;
+        font-weight: 800;
+        margin: 0;
+        letter-spacing: 1px;
+        animation: fadeInDown 1s ease-in-out;
+    }
+
+    .landing-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        max-width: 1100px;
+        margin: 50px auto 30px;
+        padding: 40px 30px;
+        background: linear-gradient(to right, #fdf6f0, #e4e9f1);
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+        animation: fadeIn 1s ease-in-out;
+        gap: 50px;
+    }
+
+    .landing-left {
+        flex: 1;
+        text-align: left;
+    }
+
+    .landing-left h2 {
+        font-size: 2rem;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .landing-left p {
+        font-size: 1.1rem;
+        color: #444;
+        margin-bottom: 30px;
+    }
+
+    .landing-buttons {
+        display: flex;
+        gap: 20px;
+    }
+
+    .landing-buttons a {
+        text-decoration: none;
+        padding: 12px 28px;
+        border-radius: 30px;
+        background-color: #6d83a3;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .landing-buttons a:hover {
+        background-color: #4d6585;
+        transform: translateY(-2px);
+    }
+
+    .landing-right {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing-right img {
+        max-width: 100%;
+        max-height: 260px;
+        border-radius: 16px;
+    }
+
+    .feature-bubbles {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        justify-content: center;
+        margin: 20px auto 60px;
+        padding: 0 20px;
+        max-width: 1000px;
+    }
+
+    .bubble-card {
+        background: linear-gradient(145deg, #f1f3f8, #dcdfe8);
+        padding: 14px 22px;
+        border-radius: 18px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        font-size: 15px;
+        color: #333;
+        width: fit-content;
+        animation: floatBubble 4s ease-in-out infinite, fadeInUp 0.6s ease forwards;
+        opacity: 0;
+    }
+
+    .bubble-card:hover {
+        transform: scale(1.05);
+        background: #eef1f8;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .bubble-card:nth-child(1) { animation-delay: 0.2s; }
+    .bubble-card:nth-child(2) { animation-delay: 0.4s; }
+    .bubble-card:nth-child(3) { animation-delay: 0.6s; }
+    .bubble-card:nth-child(4) { animation-delay: 0.8s; }
+    .bubble-card:nth-child(5) { animation-delay: 1s; }
+
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatBubble {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<!-- 🌿 Hero Section -->
+<div class="hero-section">
+    <h1>Budget Buddy</h1>
+</div>
+
+<!-- 🪄 Main Section -->
+<div class="landing-wrapper">
+    <div class="landing-left">
+        <h2>Track. Save. Simplify.</h2>
+        <p>Your smart, minimal, and secure personal expense tracker.  
+        <br><strong>Plan better. Spend smarter. Track with peace ☁️</strong></p>
+
+        <div class="landing-buttons">
+            <a href="/register">📝 Register</a>
+            <a href="/login">🔐 Login</a>
+        </div>
+    </div>
+
+    <div class="landing-right">
+        <img src="https://i.pinimg.com/1200x/d2/37/fb/d237fb9e11c383a731f6d5f5bc21b7b9.jpg" alt="Budget Illustration">
+    </div>
+</div>
+
+<!-- ✨ Feature Bubbles -->
+<div class="feature-bubbles">
+    <div class="bubble-card">🧠 Track income & expenses</div>
+    <div class="bubble-card">📊 Smart monthly summaries</div>
+    <div class="bubble-card">⚠️ Instant budget alerts</div>
+    <div class="bubble-card">📥 Download CSV reports</div>
+    <div class="bubble-card">🔒 Fully private & secure</div>
+</div>
+
+{% endblock %}

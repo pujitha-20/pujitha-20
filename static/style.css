@@ -1,0 +1,118 @@
+/* --- GLOBAL RESET --- */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #d3d3e7, #eef2f3);
+    color: #2f2f2f;
+}
+
+/* --- NAVIGATION BAR --- */
+nav {
+    background-color: #3d3d5c;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffc107;
+}
+
+/* --- HOME PAGE FULL WIDTH STYLE --- */
+.full-home {
+    max-width: 100%;
+    padding: 40px 80px;
+    text-align: center;
+}
+
+.full-home h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.metrics-box {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.metric {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 240px;
+    margin: 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.metric:hover {
+    transform: scale(1.05);
+}
+
+/* --- ENTRANCE ANIMATION --- */
+@keyframes fadeSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.full-home {
+    animation: fadeSlide 1s ease-in-out;
+}
+/* ------------------- View Page Styles ------------------- */
+.page-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.page-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #3e3e3e;
+}
+
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.txn-card {
+    background: linear-gradient(135deg, #f7f9fd, #e8ecf3);
+    border-radius: 16px;
+    padding: 20px;
+    width: 280px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.txn-card:hover {
+    transform: translateY(-5px);
+}
+.wave {
+    position: absolute;
+    bottom: -1px;
+    width: 100%;
+    height: 120px;
+    z-index: 1;
+}
